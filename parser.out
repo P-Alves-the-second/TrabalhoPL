@@ -1,0 +1,566 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CALL
+    DO
+    END
+    GE
+    LE
+    NEQ
+    PROCEDURE
+
+Grammar
+
+Rule 0     S' -> command
+Rule 1     command -> SELECT column_list FROM ID where_opt limit_opt SEMI
+Rule 2     column_list -> STAR
+Rule 3     column_list -> ID COMMA column_list
+Rule 4     column_list -> ID
+Rule 5     where_opt -> WHERE condition
+Rule 6     where_opt -> <empty>
+Rule 7     limit_opt -> LIMIT NUMBER
+Rule 8     limit_opt -> <empty>
+Rule 9     condition -> ID EQ value
+Rule 10    condition -> ID GT value
+Rule 11    condition -> ID LT value
+Rule 12    value -> NUMBER
+Rule 13    value -> STRING
+Rule 14    command -> IMPORT TABLE ID FROM STRING SEMI
+Rule 15    command -> EXPORT TABLE ID AS STRING SEMI
+Rule 16    command -> CREATE TABLE ID FROM ID JOIN ID USING ID SEMI
+Rule 17    command -> DISCARD TABLE ID SEMI
+Rule 18    command -> RENAME TABLE ID ID SEMI
+Rule 19    command -> PRINT TABLE ID SEMI
+
+Terminals, with rules where they appear
+
+AS                   : 15
+CALL                 : 
+COMMA                : 3
+CREATE               : 16
+DISCARD              : 17
+DO                   : 
+END                  : 
+EQ                   : 9
+EXPORT               : 15
+FROM                 : 1 14 16
+GE                   : 
+GT                   : 10
+ID                   : 1 3 4 9 10 11 14 15 16 16 16 16 17 18 18 19
+IMPORT               : 14
+JOIN                 : 16
+LE                   : 
+LIMIT                : 7
+LT                   : 11
+NEQ                  : 
+NUMBER               : 7 12
+PRINT                : 19
+PROCEDURE            : 
+RENAME               : 18
+SELECT               : 1
+SEMI                 : 1 14 15 16 17 18 19
+STAR                 : 2
+STRING               : 13 14 15
+TABLE                : 14 15 16 17 18 19
+USING                : 16
+WHERE                : 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+column_list          : 1 3
+command              : 0
+condition            : 5
+limit_opt            : 1
+value                : 9 10 11
+where_opt            : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . command
+    (1) command -> . SELECT column_list FROM ID where_opt limit_opt SEMI
+    (14) command -> . IMPORT TABLE ID FROM STRING SEMI
+    (15) command -> . EXPORT TABLE ID AS STRING SEMI
+    (16) command -> . CREATE TABLE ID FROM ID JOIN ID USING ID SEMI
+    (17) command -> . DISCARD TABLE ID SEMI
+    (18) command -> . RENAME TABLE ID ID SEMI
+    (19) command -> . PRINT TABLE ID SEMI
+
+    SELECT          shift and go to state 2
+    IMPORT          shift and go to state 3
+    EXPORT          shift and go to state 4
+    CREATE          shift and go to state 5
+    DISCARD         shift and go to state 6
+    RENAME          shift and go to state 7
+    PRINT           shift and go to state 8
+
+    command                        shift and go to state 1
+
+state 1
+
+    (0) S' -> command .
+
+
+
+state 2
+
+    (1) command -> SELECT . column_list FROM ID where_opt limit_opt SEMI
+    (2) column_list -> . STAR
+    (3) column_list -> . ID COMMA column_list
+    (4) column_list -> . ID
+
+    STAR            shift and go to state 11
+    ID              shift and go to state 10
+
+    column_list                    shift and go to state 9
+
+state 3
+
+    (14) command -> IMPORT . TABLE ID FROM STRING SEMI
+
+    TABLE           shift and go to state 12
+
+
+state 4
+
+    (15) command -> EXPORT . TABLE ID AS STRING SEMI
+
+    TABLE           shift and go to state 13
+
+
+state 5
+
+    (16) command -> CREATE . TABLE ID FROM ID JOIN ID USING ID SEMI
+
+    TABLE           shift and go to state 14
+
+
+state 6
+
+    (17) command -> DISCARD . TABLE ID SEMI
+
+    TABLE           shift and go to state 15
+
+
+state 7
+
+    (18) command -> RENAME . TABLE ID ID SEMI
+
+    TABLE           shift and go to state 16
+
+
+state 8
+
+    (19) command -> PRINT . TABLE ID SEMI
+
+    TABLE           shift and go to state 17
+
+
+state 9
+
+    (1) command -> SELECT column_list . FROM ID where_opt limit_opt SEMI
+
+    FROM            shift and go to state 18
+
+
+state 10
+
+    (3) column_list -> ID . COMMA column_list
+    (4) column_list -> ID .
+
+    COMMA           shift and go to state 19
+    FROM            reduce using rule 4 (column_list -> ID .)
+
+
+state 11
+
+    (2) column_list -> STAR .
+
+    FROM            reduce using rule 2 (column_list -> STAR .)
+
+
+state 12
+
+    (14) command -> IMPORT TABLE . ID FROM STRING SEMI
+
+    ID              shift and go to state 20
+
+
+state 13
+
+    (15) command -> EXPORT TABLE . ID AS STRING SEMI
+
+    ID              shift and go to state 21
+
+
+state 14
+
+    (16) command -> CREATE TABLE . ID FROM ID JOIN ID USING ID SEMI
+
+    ID              shift and go to state 22
+
+
+state 15
+
+    (17) command -> DISCARD TABLE . ID SEMI
+
+    ID              shift and go to state 23
+
+
+state 16
+
+    (18) command -> RENAME TABLE . ID ID SEMI
+
+    ID              shift and go to state 24
+
+
+state 17
+
+    (19) command -> PRINT TABLE . ID SEMI
+
+    ID              shift and go to state 25
+
+
+state 18
+
+    (1) command -> SELECT column_list FROM . ID where_opt limit_opt SEMI
+
+    ID              shift and go to state 26
+
+
+state 19
+
+    (3) column_list -> ID COMMA . column_list
+    (2) column_list -> . STAR
+    (3) column_list -> . ID COMMA column_list
+    (4) column_list -> . ID
+
+    STAR            shift and go to state 11
+    ID              shift and go to state 10
+
+    column_list                    shift and go to state 27
+
+state 20
+
+    (14) command -> IMPORT TABLE ID . FROM STRING SEMI
+
+    FROM            shift and go to state 28
+
+
+state 21
+
+    (15) command -> EXPORT TABLE ID . AS STRING SEMI
+
+    AS              shift and go to state 29
+
+
+state 22
+
+    (16) command -> CREATE TABLE ID . FROM ID JOIN ID USING ID SEMI
+
+    FROM            shift and go to state 30
+
+
+state 23
+
+    (17) command -> DISCARD TABLE ID . SEMI
+
+    SEMI            shift and go to state 31
+
+
+state 24
+
+    (18) command -> RENAME TABLE ID . ID SEMI
+
+    ID              shift and go to state 32
+
+
+state 25
+
+    (19) command -> PRINT TABLE ID . SEMI
+
+    SEMI            shift and go to state 33
+
+
+state 26
+
+    (1) command -> SELECT column_list FROM ID . where_opt limit_opt SEMI
+    (5) where_opt -> . WHERE condition
+    (6) where_opt -> .
+
+    WHERE           shift and go to state 35
+    LIMIT           reduce using rule 6 (where_opt -> .)
+    SEMI            reduce using rule 6 (where_opt -> .)
+
+    where_opt                      shift and go to state 34
+
+state 27
+
+    (3) column_list -> ID COMMA column_list .
+
+    FROM            reduce using rule 3 (column_list -> ID COMMA column_list .)
+
+
+state 28
+
+    (14) command -> IMPORT TABLE ID FROM . STRING SEMI
+
+    STRING          shift and go to state 36
+
+
+state 29
+
+    (15) command -> EXPORT TABLE ID AS . STRING SEMI
+
+    STRING          shift and go to state 37
+
+
+state 30
+
+    (16) command -> CREATE TABLE ID FROM . ID JOIN ID USING ID SEMI
+
+    ID              shift and go to state 38
+
+
+state 31
+
+    (17) command -> DISCARD TABLE ID SEMI .
+
+    $end            reduce using rule 17 (command -> DISCARD TABLE ID SEMI .)
+
+
+state 32
+
+    (18) command -> RENAME TABLE ID ID . SEMI
+
+    SEMI            shift and go to state 39
+
+
+state 33
+
+    (19) command -> PRINT TABLE ID SEMI .
+
+    $end            reduce using rule 19 (command -> PRINT TABLE ID SEMI .)
+
+
+state 34
+
+    (1) command -> SELECT column_list FROM ID where_opt . limit_opt SEMI
+    (7) limit_opt -> . LIMIT NUMBER
+    (8) limit_opt -> .
+
+    LIMIT           shift and go to state 41
+    SEMI            reduce using rule 8 (limit_opt -> .)
+
+    limit_opt                      shift and go to state 40
+
+state 35
+
+    (5) where_opt -> WHERE . condition
+    (9) condition -> . ID EQ value
+    (10) condition -> . ID GT value
+    (11) condition -> . ID LT value
+
+    ID              shift and go to state 43
+
+    condition                      shift and go to state 42
+
+state 36
+
+    (14) command -> IMPORT TABLE ID FROM STRING . SEMI
+
+    SEMI            shift and go to state 44
+
+
+state 37
+
+    (15) command -> EXPORT TABLE ID AS STRING . SEMI
+
+    SEMI            shift and go to state 45
+
+
+state 38
+
+    (16) command -> CREATE TABLE ID FROM ID . JOIN ID USING ID SEMI
+
+    JOIN            shift and go to state 46
+
+
+state 39
+
+    (18) command -> RENAME TABLE ID ID SEMI .
+
+    $end            reduce using rule 18 (command -> RENAME TABLE ID ID SEMI .)
+
+
+state 40
+
+    (1) command -> SELECT column_list FROM ID where_opt limit_opt . SEMI
+
+    SEMI            shift and go to state 47
+
+
+state 41
+
+    (7) limit_opt -> LIMIT . NUMBER
+
+    NUMBER          shift and go to state 48
+
+
+state 42
+
+    (5) where_opt -> WHERE condition .
+
+    LIMIT           reduce using rule 5 (where_opt -> WHERE condition .)
+    SEMI            reduce using rule 5 (where_opt -> WHERE condition .)
+
+
+state 43
+
+    (9) condition -> ID . EQ value
+    (10) condition -> ID . GT value
+    (11) condition -> ID . LT value
+
+    EQ              shift and go to state 49
+    GT              shift and go to state 50
+    LT              shift and go to state 51
+
+
+state 44
+
+    (14) command -> IMPORT TABLE ID FROM STRING SEMI .
+
+    $end            reduce using rule 14 (command -> IMPORT TABLE ID FROM STRING SEMI .)
+
+
+state 45
+
+    (15) command -> EXPORT TABLE ID AS STRING SEMI .
+
+    $end            reduce using rule 15 (command -> EXPORT TABLE ID AS STRING SEMI .)
+
+
+state 46
+
+    (16) command -> CREATE TABLE ID FROM ID JOIN . ID USING ID SEMI
+
+    ID              shift and go to state 52
+
+
+state 47
+
+    (1) command -> SELECT column_list FROM ID where_opt limit_opt SEMI .
+
+    $end            reduce using rule 1 (command -> SELECT column_list FROM ID where_opt limit_opt SEMI .)
+
+
+state 48
+
+    (7) limit_opt -> LIMIT NUMBER .
+
+    SEMI            reduce using rule 7 (limit_opt -> LIMIT NUMBER .)
+
+
+state 49
+
+    (9) condition -> ID EQ . value
+    (12) value -> . NUMBER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 54
+    STRING          shift and go to state 55
+
+    value                          shift and go to state 53
+
+state 50
+
+    (10) condition -> ID GT . value
+    (12) value -> . NUMBER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 54
+    STRING          shift and go to state 55
+
+    value                          shift and go to state 56
+
+state 51
+
+    (11) condition -> ID LT . value
+    (12) value -> . NUMBER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 54
+    STRING          shift and go to state 55
+
+    value                          shift and go to state 57
+
+state 52
+
+    (16) command -> CREATE TABLE ID FROM ID JOIN ID . USING ID SEMI
+
+    USING           shift and go to state 58
+
+
+state 53
+
+    (9) condition -> ID EQ value .
+
+    LIMIT           reduce using rule 9 (condition -> ID EQ value .)
+    SEMI            reduce using rule 9 (condition -> ID EQ value .)
+
+
+state 54
+
+    (12) value -> NUMBER .
+
+    LIMIT           reduce using rule 12 (value -> NUMBER .)
+    SEMI            reduce using rule 12 (value -> NUMBER .)
+
+
+state 55
+
+    (13) value -> STRING .
+
+    LIMIT           reduce using rule 13 (value -> STRING .)
+    SEMI            reduce using rule 13 (value -> STRING .)
+
+
+state 56
+
+    (10) condition -> ID GT value .
+
+    LIMIT           reduce using rule 10 (condition -> ID GT value .)
+    SEMI            reduce using rule 10 (condition -> ID GT value .)
+
+
+state 57
+
+    (11) condition -> ID LT value .
+
+    LIMIT           reduce using rule 11 (condition -> ID LT value .)
+    SEMI            reduce using rule 11 (condition -> ID LT value .)
+
+
+state 58
+
+    (16) command -> CREATE TABLE ID FROM ID JOIN ID USING . ID SEMI
+
+    ID              shift and go to state 59
+
+
+state 59
+
+    (16) command -> CREATE TABLE ID FROM ID JOIN ID USING ID . SEMI
+
+    SEMI            shift and go to state 60
+
+
+state 60
+
+    (16) command -> CREATE TABLE ID FROM ID JOIN ID USING ID SEMI .
+
+    $end            reduce using rule 16 (command -> CREATE TABLE ID FROM ID JOIN ID USING ID SEMI .)
+
