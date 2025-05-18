@@ -4,20 +4,32 @@ from parser import *
 tables = {}
 procedures = {} 
 
-def eval_condition(row, cond):
+def eval_simple_condition(row, cond):
     val = row[cond.column]
     if isinstance(cond.value, (int, float)):
         try:
             val = float(val)
         except ValueError:
-            pass 
+            pass
     if cond.operator == '=':
         return val == cond.value
-    if cond.operator == '>':
+    elif cond.operator == '>':
         return val > cond.value
-    if cond.operator == '<':
+    elif cond.operator == '<':
         return val < cond.value
-    return False
+    else:
+        raise Exception(f"Operador desconhecido: {cond.operator}")
+    
+def eval_and_condition(row, cond):
+    return eval_condition(row, cond.left) and eval_condition(row, cond.right)   
+
+def eval_condition(row, cond):
+    if isinstance(cond, Condition):
+        return eval_simple_condition(row, cond)
+    elif isinstance(cond, AndCondition):
+        return eval_and_condition(row, cond)
+    else:
+        raise Exception("Tipo de condição não suportado")
 
 def join_tables(table1, table2, column):
     result = []

@@ -11,6 +11,11 @@ class Condition:
         self.operator = operator
         self.value = value
 
+class AndCondition:
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+
 class ImportTable:
     def __init__(self, table_name, file_path):
         self.table_name = table_name
