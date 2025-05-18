@@ -27,7 +27,8 @@ keywords = {
 tokens = list(keywords.values()) + [
     'ID', 'NUMBER', 'STRING',
     'EQ', 'NEQ', 'LT', 'GT', 'LE', 'GE',
-    'COMMA', 'SEMI', 'STAR'
+    'COMMA', 'SEMI', 'STAR', 'LPAREN',
+    'RPAREN',
 ]
 
 # Regras
@@ -41,6 +42,8 @@ t_COMMA = r','
 t_SEMI = r';'
 t_STAR = r'\*'
 t_ignore = ' \t'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
 
 
 def t_COMMENT(t):
