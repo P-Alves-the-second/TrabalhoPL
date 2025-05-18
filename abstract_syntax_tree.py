@@ -28,6 +28,11 @@ class CreateTable:
         self.table_2 = table_2
         self.column = column
 
+class CreateTableAsSelect:
+    def __init__(self, new_table, select_query):
+        self.new_table = new_table
+        self.select_query = select_query
+
 class DiscardTable:
     def __init__(self, table_name):
         self.table_name = table_name
@@ -40,3 +45,12 @@ class RenameTable:
 class PrintTable:
     def __init__(self, table_name):
         self.table_name = table_name
+
+class Procedure:
+    def __init__(self, name, commands):
+        self.name = name
+        self.commands = commands
+
+class Call:
+    def __init__(self, name):
+        self.name = name

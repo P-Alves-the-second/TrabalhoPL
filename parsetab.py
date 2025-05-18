@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'commandAS CALL COMMA CREATE DISCARD DO END EQ EXPORT FROM GE GT ID IMPORT JOIN LE LIMIT LT NEQ NUMBER PRINT PROCEDURE RENAME SELECT SEMI STAR STRING TABLE USING WHEREcommand : SELECT column_list FROM ID where_opt limit_opt SEMIcolumn_list : STARcolumn_list : ID COMMA column_listcolumn_list : IDwhere_opt : WHERE conditionwhere_opt : limit_opt : LIMIT NUMBERlimit_opt : condition : ID EQ value\n                 | ID GT value\n                 | ID LT valuevalue : NUMBER\n             | STRINGcommand : IMPORT TABLE ID FROM STRING SEMIcommand : EXPORT TABLE ID AS STRING SEMIcommand : CREATE TABLE ID FROM ID JOIN ID USING ID SEMIcommand : DISCARD TABLE ID SEMIcommand : RENAME TABLE ID ID SEMIcommand : PRINT TABLE ID SEMI'
+_lr_signature = 'commandsAS CALL COMMA CREATE DISCARD DO END EQ EXPORT FROM GE GT ID IMPORT JOIN LE LIMIT LPAREN LT NEQ NUMBER PRINT PROCEDURE RENAME RPAREN SELECT SEMI STAR STRING TABLE USING WHEREcommands : command commandscommands : commandcommand : SELECT column_list FROM ID where_opt limit_opt SEMIcolumn_list : STARcolumn_list : ID COMMA column_listcolumn_list : IDwhere_opt : WHERE conditionwhere_opt : limit_opt : LIMIT NUMBERlimit_opt : condition : ID EQ value\n| ID GT value\n| ID LT valuevalue : NUMBER\n| STRINGcommand : IMPORT TABLE ID FROM STRING SEMIcommand : EXPORT TABLE ID AS STRING SEMIcommand : CREATE TABLE ID FROM ID JOIN ID USING LPAREN ID RPAREN SEMIcommand : CREATE TABLE ID FROM ID JOIN ID USING ID SEMIcommand : CREATE TABLE ID SELECT column_list FROM ID where_opt limit_opt SEMIcommand : DISCARD TABLE ID SEMIcommand : RENAME TABLE ID ID SEMIcommand : PRINT TABLE ID SEMIcommand : PROCEDURE ID DO commands ENDcommand : CALL ID SEMI'
     
-_lr_action_items = {'SELECT':([0,],[2,]),'IMPORT':([0,],[3,]),'EXPORT':([0,],[4,]),'CREATE':([0,],[5,]),'DISCARD':([0,],[6,]),'RENAME':([0,],[7,]),'PRINT':([0,],[8,]),'$end':([1,31,33,39,44,45,47,60,],[0,-17,-19,-18,-14,-15,-1,-16,]),'STAR':([2,19,],[11,11,]),'ID':([2,12,13,14,15,16,17,18,19,24,30,35,46,58,],[10,20,21,22,23,24,25,26,10,32,38,43,52,59,]),'TABLE':([3,4,5,6,7,8,],[12,13,14,15,16,17,]),'FROM':([9,10,11,20,22,27,],[18,-4,-2,28,30,-3,]),'COMMA':([10,],[19,]),'AS':([21,],[29,]),'SEMI':([23,25,26,32,34,36,37,40,42,48,53,54,55,56,57,59,],[31,33,-6,39,-8,44,45,47,-5,-7,-9,-12,-13,-10,-11,60,]),'WHERE':([26,],[35,]),'LIMIT':([26,34,42,53,54,55,56,57,],[-6,41,-5,-9,-12,-13,-10,-11,]),'STRING':([28,29,49,50,51,],[36,37,55,55,55,]),'JOIN':([38,],[46,]),'NUMBER':([41,49,50,51,],[48,54,54,54,]),'EQ':([43,],[49,]),'GT':([43,],[50,]),'LT':([43,],[51,]),'USING':([52,],[58,]),}
+_lr_action_items = {'SELECT':([0,2,28,32,33,40,42,50,51,56,57,60,77,79,81,],[3,3,39,3,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'IMPORT':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[4,4,4,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'EXPORT':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[5,5,5,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'CREATE':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[6,6,6,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'DISCARD':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[7,7,7,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'RENAME':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[8,8,8,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'PRINT':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[9,9,9,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'PROCEDURE':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[10,10,10,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'CALL':([0,2,32,33,40,42,50,51,56,57,60,77,79,81,],[11,11,11,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'$end':([1,2,12,33,40,42,50,51,56,57,60,77,79,81,],[0,-2,-1,-25,-21,-23,-22,-24,-16,-17,-3,-19,-20,-18,]),'END':([2,12,33,40,42,43,50,51,56,57,60,77,79,81,],[-2,-1,-25,-21,-23,51,-22,-24,-16,-17,-3,-19,-20,-18,]),'STAR':([3,25,39,],[15,15,15,]),'ID':([3,10,11,16,17,18,19,20,21,24,25,30,38,39,45,58,59,72,75,],[14,22,23,26,27,28,29,30,31,34,14,41,48,14,55,65,66,74,78,]),'TABLE':([4,5,6,7,8,9,],[16,17,18,19,20,21,]),'FROM':([13,14,15,26,28,35,49,],[24,-6,-4,36,38,-5,59,]),'COMMA':([14,],[25,]),'DO':([22,],[32,]),'SEMI':([23,29,31,34,41,44,46,47,52,54,61,66,67,68,69,70,71,73,74,76,80,],[33,40,42,-8,50,-10,56,57,60,-7,-9,-8,-11,-14,-15,-12,-13,-10,77,79,81,]),'AS':([27,],[37,]),'WHERE':([34,66,],[45,45,]),'LIMIT':([34,44,54,66,67,68,69,70,71,73,],[-8,53,-7,-8,-11,-14,-15,-12,-13,53,]),'STRING':([36,37,62,63,64,],[46,47,69,69,69,]),'JOIN':([48,],[58,]),'NUMBER':([53,62,63,64,],[61,68,68,68,]),'EQ':([55,],[62,]),'GT':([55,],[63,]),'LT':([55,],[64,]),'USING':([65,],[72,]),'LPAREN':([72,],[75,]),'RPAREN':([78,],[80,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'command':([0,],[1,]),'column_list':([2,19,],[9,27,]),'where_opt':([26,],[34,]),'limit_opt':([34,],[40,]),'condition':([35,],[42,]),'value':([49,50,51,],[53,56,57,]),}
+_lr_goto_items = {'commands':([0,2,32,],[1,12,43,]),'command':([0,2,32,],[2,2,2,]),'column_list':([3,25,39,],[13,35,49,]),'where_opt':([34,66,],[44,73,]),'limit_opt':([44,73,],[52,76,]),'condition':([45,],[54,]),'value':([62,63,64,],[67,70,71,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,24 +26,30 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> command","S'",1,None,None,None),
-  ('command -> SELECT column_list FROM ID where_opt limit_opt SEMI','command',7,'p_command_select','parser.py',8),
-  ('column_list -> STAR','column_list',1,'p_column_list_all','parser.py',12),
-  ('column_list -> ID COMMA column_list','column_list',3,'p_column_list','parser.py',16),
-  ('column_list -> ID','column_list',1,'p_column_list_one','parser.py',20),
-  ('where_opt -> WHERE condition','where_opt',2,'p_where_opt','parser.py',24),
-  ('where_opt -> <empty>','where_opt',0,'p_where_opt_empty','parser.py',28),
-  ('limit_opt -> LIMIT NUMBER','limit_opt',2,'p_limit_opt','parser.py',32),
-  ('limit_opt -> <empty>','limit_opt',0,'p_limit_opt_empty','parser.py',36),
-  ('condition -> ID EQ value','condition',3,'p_condition','parser.py',40),
-  ('condition -> ID GT value','condition',3,'p_condition','parser.py',41),
-  ('condition -> ID LT value','condition',3,'p_condition','parser.py',42),
-  ('value -> NUMBER','value',1,'p_value','parser.py',46),
-  ('value -> STRING','value',1,'p_value','parser.py',47),
-  ('command -> IMPORT TABLE ID FROM STRING SEMI','command',6,'p_command_import','parser.py',54),
-  ('command -> EXPORT TABLE ID AS STRING SEMI','command',6,'p_command_export','parser.py',58),
-  ('command -> CREATE TABLE ID FROM ID JOIN ID USING ID SEMI','command',10,'p_command_create','parser.py',62),
-  ('command -> DISCARD TABLE ID SEMI','command',4,'p_command_discard','parser.py',66),
-  ('command -> RENAME TABLE ID ID SEMI','command',5,'p_command_rename','parser.py',70),
-  ('command -> PRINT TABLE ID SEMI','command',4,'p_command_print','parser.py',74),
+  ("S' -> commands","S'",1,None,None,None),
+  ('commands -> command commands','commands',2,'p_commands_multiple','parser.py',8),
+  ('commands -> command','commands',1,'p_commands_single','parser.py',12),
+  ('command -> SELECT column_list FROM ID where_opt limit_opt SEMI','command',7,'p_command_select','parser.py',16),
+  ('column_list -> STAR','column_list',1,'p_column_list_all','parser.py',20),
+  ('column_list -> ID COMMA column_list','column_list',3,'p_column_list','parser.py',24),
+  ('column_list -> ID','column_list',1,'p_column_list_one','parser.py',28),
+  ('where_opt -> WHERE condition','where_opt',2,'p_where_opt','parser.py',32),
+  ('where_opt -> <empty>','where_opt',0,'p_where_opt_empty','parser.py',36),
+  ('limit_opt -> LIMIT NUMBER','limit_opt',2,'p_limit_opt','parser.py',40),
+  ('limit_opt -> <empty>','limit_opt',0,'p_limit_opt_empty','parser.py',44),
+  ('condition -> ID EQ value','condition',3,'p_condition','parser.py',48),
+  ('condition -> ID GT value','condition',3,'p_condition','parser.py',49),
+  ('condition -> ID LT value','condition',3,'p_condition','parser.py',50),
+  ('value -> NUMBER','value',1,'p_value','parser.py',54),
+  ('value -> STRING','value',1,'p_value','parser.py',55),
+  ('command -> IMPORT TABLE ID FROM STRING SEMI','command',6,'p_command_import','parser.py',59),
+  ('command -> EXPORT TABLE ID AS STRING SEMI','command',6,'p_command_export','parser.py',63),
+  ('command -> CREATE TABLE ID FROM ID JOIN ID USING LPAREN ID RPAREN SEMI','command',12,'p_command_create_join_paren','parser.py',67),
+  ('command -> CREATE TABLE ID FROM ID JOIN ID USING ID SEMI','command',10,'p_command_create_join','parser.py',71),
+  ('command -> CREATE TABLE ID SELECT column_list FROM ID where_opt limit_opt SEMI','command',10,'p_command_create_as_select','parser.py',76),
+  ('command -> DISCARD TABLE ID SEMI','command',4,'p_command_discard','parser.py',81),
+  ('command -> RENAME TABLE ID ID SEMI','command',5,'p_command_rename','parser.py',85),
+  ('command -> PRINT TABLE ID SEMI','command',4,'p_command_print','parser.py',89),
+  ('command -> PROCEDURE ID DO commands END','command',5,'p_command_procedure','parser.py',93),
+  ('command -> CALL ID SEMI','command',3,'p_command_call','parser.py',97),
 ]
