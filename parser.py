@@ -44,11 +44,16 @@ def p_limit_opt_empty(p):
     'limit_opt : '
     p[0] = None
 
-def p_condition(p):
+def p_condition_single(p):
     '''condition : ID EQ value
                  | ID GT value
                  | ID LT value'''
     p[0] = Condition(p[1], p[2], p[3])
+
+def p_condition_binary(p):
+    'condition : condition AND condition'
+    p[0] = AndCondition(p[1], p[3])
+
 
 def p_value(p):
     '''value : NUMBER

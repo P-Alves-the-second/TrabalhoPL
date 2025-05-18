@@ -20,7 +20,8 @@ keywords = {
     'using': 'USING',        
     'discard': 'DISCARD',    
     'rename': 'RENAME',      
-    'print': 'PRINT'
+    'print': 'PRINT',
+    'and': 'AND',
 }
 
 # Tokens
@@ -28,7 +29,7 @@ tokens = list(keywords.values()) + [
     'ID', 'NUMBER', 'STRING',
     'EQ', 'NEQ', 'LT', 'GT', 'LE', 'GE',
     'COMMA', 'SEMI', 'STAR', 'LPAREN',
-    'RPAREN',
+    'RPAREN', 
 ]
 
 # Regras
